@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/fininfo-authtask/static/css/main.073c9b0a.css",
+    "main.js": "/fininfo-authtask/static/js/main.bd3f6bfb.js",
+    "static/js/787.0d2fdd1d.chunk.js": "/fininfo-authtask/static/js/787.0d2fdd1d.chunk.js",
+    "index.html": "/fininfo-authtask/index.html",
+    "main.073c9b0a.css.map": "/fininfo-authtask/static/css/main.073c9b0a.css.map",
+    "main.bd3f6bfb.js.map": "/fininfo-authtask/static/js/main.bd3f6bfb.js.map",
+    "787.0d2fdd1d.chunk.js.map": "/fininfo-authtask/static/js/787.0d2fdd1d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.bd3f6bfb.js"
+  ]
+}
