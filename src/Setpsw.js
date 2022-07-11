@@ -7,7 +7,7 @@ import PasswordSet from './PasswordSet';
 const config = {
     headers : {
       'Content-Type': 'application/json',
-       'x-csrf-token': 'cnJmQDIwMjI=',
+       'x-csrf-token': `${process.env.REACT_APP_API_KEY}`,
      }
   };
    
@@ -41,14 +41,14 @@ function Setpsw() {
         navigate("/passwordSet",{state:pswData})
       })
       .catch((error) => {
-        console.log(error.response);
+        alert(error.response.data.message);
       });
     }    
   
   return (
     <div>
-        <h2>{location.state.email}</h2>
         <h1>Verify Email</h1>
+        <p>(Otp sent to your email id)</p>
         <form onSubmit={handleSubmit}>
             <label htmlFor="username">
               Email:

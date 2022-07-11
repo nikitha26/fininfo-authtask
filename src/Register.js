@@ -6,7 +6,7 @@ import setpsw from './Setpsw';
 const config = {
   headers : {
     'Content-Type': 'application/json',
-     'x-csrf-token': 'cnJmQDIwMjI=',
+     'x-csrf-token': `${process.env.REACT_APP_API_KEY}`,
    }
 };
  
@@ -31,8 +31,7 @@ function Register() {
       [e.target.name]: value
     });
   };
-  // console.log('$$$')
-  // console.log(data);
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     const userData = {
@@ -57,15 +56,18 @@ function Register() {
           console.log("server responded");
          
         } else if (error.request) {
-          console.log("network error");
+          alert("network error");
         } else {
-          console.log(error);
+          alert(error);
         }
-        
+        alert(error.response.data.message)
       });
       
   };
   
+  const loginBtn = () => {
+    navigate("/loginComponent");
+  }
 
 
   return (
@@ -115,7 +117,7 @@ function Register() {
               placeholder=""
               value={data.mobile}
               onChange={handleChange}
-            />
+            /><br/><br/>
           
             
             {/* <label htmlFor="confirm_pwd">
@@ -135,6 +137,12 @@ function Register() {
             type="submit"
             >
               Sign Up
+            </button><br/><br/>
+            <button
+             type="button"
+             onClick={loginBtn}
+            >
+              Already Have Account Login
             </button>
           </form>
           {/* <p>

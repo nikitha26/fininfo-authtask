@@ -1,12 +1,6 @@
 import React, {useState} from 'react'
-import api from './api/axios';
+import axios from 'axios';
 import {useNavigate} from 'react-router-dom'
-const config = {
-  headers : {
-    'Content-Type': 'application/json',
-     'x-csrf-token': 'cnJmQDIwMjI=',
-   }
-};
 
 function LoginComponent() {
   const navigate = useNavigate();
@@ -24,37 +18,41 @@ function LoginComponent() {
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     const userData = {
       email: logindata.email,
       password:logindata.password
     };
-    var self = this;
-    await api
-      .post("/api/user/auth", userData,config)
-      .then((response) => {
-        self.setRes({events: response.data})
-        // setSuccessMsg(true);
-        //navigate("/dashboard", {state:res})
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(error.response);
-          console.log("server responded");
-         
-        } else if (error.request) {
-          console.log("network error");
-        } else {
-          console.log(error);
+    try
+    {
+      var response = await axios(
+        {
+            method: 'post',
+            url: 'https://ring-ring-food.herokuapp.com/api/user/auth',
+            data: userData,
+            headers : {
+              'Content-Type': 'application/json',
+               'x-csrf-token': `${process.env.REACT_APP_API_KEY}`,
+             }
         }
-        
-      });
-      console.log(res)
-
+      );
+        //console.log(response.data)
+        navigate("/dashboard",{state:response.data,logindata:logindata})
+    }
+    catch (err) 
+    {
+      alert(err.response.data.message);
+    }
+    
   };
+  const registerBtn = () => {
+    navigate("/register")
+  }
   
   return (
-    <div>LoginComponent
+    <div>
+      <h2>Login With Your Register Email Id and Password</h2>
       <form onSubmit={handleSubmit}>
             <label htmlFor="username">
               Email:
@@ -62,7 +60,7 @@ function LoginComponent() {
             <input
               type="email"
               name="email"
-              autoComplete="off"
+             
               value={logindata.email}
               onChange={handleChange}
               required
@@ -77,11 +75,17 @@ function LoginComponent() {
              value={logindata.password}
              onChange={handleChange}
              required
-            />
+            /><br/><br/>
             <button
             type="submit"
             >
              LogIn
+            </button><br/><br/>
+            <button
+             type="button"
+             onClick={registerBtn}
+            >
+             Register
             </button>
         </form> 
 

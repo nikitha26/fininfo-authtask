@@ -7,7 +7,7 @@ import Dashboard from './Dashboard';
 const config = {
     headers : {
       'Content-Type': 'application/json',
-       'x-csrf-token': 'cnJmQDIwMjI=',
+       'x-csrf-token': `${process.env.REACT_APP_API_KEY}`,
      }
   };
 
@@ -39,10 +39,10 @@ function PasswordSet() {
       .post("/api/user/set-password", userData,config)
       .then((response) => {
         console.log(response);
-        navigate("/dashboard",{state:passworddata})
+        navigate("/logincomponent")
       })
       .catch((error) => {
-        console.log(error.response);
+        alert(error.response.data.message);
       });
     }   
 
@@ -70,9 +70,9 @@ function PasswordSet() {
              autoComplete="off"
              value={location.state.otp}
              required
-            />
+            /><br/><br/>
             <label htmlFor="username">
-              Enter Password:
+              Set Password:
             </label>
             <input
              type="password"
@@ -81,7 +81,7 @@ function PasswordSet() {
              value={passworddata.password}
              onChange={handleChange}
              required
-            />
+            /><br/><br/>
             <button
             type="submit"
             >

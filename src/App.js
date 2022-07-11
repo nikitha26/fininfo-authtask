@@ -1,6 +1,6 @@
 import './App.css';
 import Register from './Register';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate,useNavigate } from 'react-router-dom';
 import Setpsw from './Setpsw';
 import PasswordSet from './PasswordSet';
 import Dashboard from './Dashboard';
@@ -12,12 +12,15 @@ function App() {
     <div className="App">
     
       <Routes>
-      <Route path='/' element={<Home/>}/>
+      <Route exact path='*' element={<Home/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/setpsw' element={<Setpsw/>}/>
         <Route path='/passwordSet' element={<PasswordSet/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='/loginComponent' element={<LoginComponent/>}/>
+        {/* <Route path="*">
+          <Redirect to="/" />
+        </Route> */}
       </Routes>       
     </div>
   );
